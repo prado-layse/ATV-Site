@@ -11,37 +11,36 @@ import org.springframework.stereotype.Repository;
 
 import jakarta.annotation.PostConstruct;
 
-//Toda classe DAO deve ser anotada com @Repository
 @Repository
 public class AtletaDAO {
 
     @Autowired
     DataSource dataSource;
-    
+
     JdbcTemplate jdbc;
 
     @PostConstruct
-    private void initialize(){
+    private void initialize() {
         jdbc = new JdbcTemplate(dataSource);
     }
 
-    public void inserirAtleta(com.fatec.cadastro_atleta.model.Atleta atleta){
-        String sql = "INSERT INTO tb-atletas(nome,cpf,dataNasc,endereco,telefone,email)" + 
-        " VALUES (?,?,?,?,?,?)";
+    public void inserirAtleta(Atleta atleta) {
+        String sql = "INSERT INTO tb_cadastro_atleta (nm_atleta, nm_sobrenome, dt_nascimento, ds_endereco, sg_estado, ds_telefone, ds_email) VALUES (?,?,?,?,?,?,?)";
 
-        Object[] obj = new Object[6];
-        obj[0] = atleta.getNome();
-        obj[1] = atleta.getCPF();
-        obj[2] = atleta.getDataNasc();
-        obj[3] = atleta.getEndereco();
-        obj[4] = atleta.getTelefone();
-        obj[5] = atleta.getEmail();
+        Object[] obj = new Object[7];
+        obj[0] = atleta.getNmAtleta();
+        obj[1] = atleta.getNmSobrenome();
+        obj[2] = atleta.getDtNascimento();
+        obj[3] = atleta.getDsEndereco();
+        obj[4] = atleta.getSgEstado();
+        obj[5] = atleta.getDsTelefone();
+        obj[6] = atleta.getDsEmail();
 
         jdbc.update(sql, obj);
     }
 
-    public List<Map<String, Object>> listarAtletas(){
-       String sql = "SELECT * FROM tb-atletas";
-       return jdbc.queryForList(sql); 
+    public List<Map<String, Object>> listarAtletas() {
+        String sql = "SELECT * FROM tb_cadastro_atleta";
+        return jdbc.queryForList(sql);
     }
 }

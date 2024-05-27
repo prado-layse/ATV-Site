@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Atletas</title>
+</head>
+<body>
+<h1>Lista de Atletas</h1>
+<table border="1">
+    <tr>
+        <th>Nome</th>
+        <th>Sobrenome</th>
+        <th>Data de Nascimento</th>
+        <th>Endereço</th>
+        <th>Estado</th>
+        <th>Telefone</th>
+        <th>Email</th>
+    </tr>
+    <tr th:each="atleta : ${atletas}">
+        <td th:text="${atleta.nmAtleta}"></td>
+        <td th:text="${atleta.nmSobrenome}"></td>
+        <td th:text="${atleta.dtNascimento}"></td>
+        <td th:text="${atleta.dsEndereco}"></td>
+        <td th:text="${atleta.sgEstado}"></td>
+        <td th:text="${atleta.dsTelefone}"></td>
+        <td th:text="${atleta.dsEmail}"></td>
+    </tr>
+</table>
+</body>
+</html>
