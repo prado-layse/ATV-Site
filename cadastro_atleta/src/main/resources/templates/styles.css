@@ -1,0 +1,91 @@
+header {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(94, 56, 78);
+    height: 90px; /* Aumenta a altura da barra de navegação */
+}
+
+nav {
+    display: flex;
+    justify-content: flex-end; /* Alinha os itens à direita */
+    align-items: end;
+    height: 100%; /* Faz com que a barra de navegação ocupe toda a altura do header */
+}
+
+nav a {
+    text-decoration: none;
+    color: whitesmoke;
+    margin-bottom: 25px;
+    margin-right: 20px; /* Ajusta a margem para alinhar os itens corretamente */
+    font-weight: lighter;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: grey;
+}
+
+nav a:nth-last-child(1){
+    border: 2px solid rgb(177, 19, 119) ;
+    line-height: 15px;
+    margin-bottom: 15px;
+    padding: 8px 30px;
+    border-radius: 20px;
+}
+
+nav a:nth-last-child(2){
+    background-color:rgb(177, 19, 119);
+    line-height: 15px;
+    margin-bottom: 15px;
+    margin-left: 20px;
+    margin-right: 10px;
+    padding: 10px 40px;
+    border-radius: 20px;
+}
+
+/* Adiciona um estilo ao corpo da página */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+h1, p {
+    margin: 20px;
+}
+
+ul {
+    margin-left: 20px;
+    padding-left: 0;
+}
+
+li {
+    list-style: none;
+    margin-bottom: 10px;
+}
+
+footer {
+    margin-top: 20px; /* Adiciona um espaço entre o conteúdo e o rodapé */
+}
+
+html{
+    background-image: url(fundo.png);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+/*.background-image {
+    position: fixed;
+    bottom: 0; 
+    right: 0;
+    background-image: url('esportes.png');
+    width: 1500px; 
+    height: 800px; 
+    background-size: cover; 
+    background-position: bottom right; 
+    transform: scale(0.7);
+}*/

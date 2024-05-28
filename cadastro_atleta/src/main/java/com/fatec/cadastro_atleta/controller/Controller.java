@@ -15,10 +15,6 @@ public class Controller {
     @Autowired
     private AtletaService atletaService;
 
-
-
-
-
     @GetMapping("/{id}")
     public ResponseEntity<Atleta> buscarAtletaPorId(@PathVariable Long id) {
         Atleta atleta = new Atleta();
