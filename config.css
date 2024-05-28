@@ -1,3 +1,29 @@
+header{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(94, 56, 78);
+    height: 90px;
+    
+}
+
+nav{
+    display: flex;
+    justify-content: flex-end;
+    align-items: end;
+    height: 100%;
+}
+
+nav a{
+    text-decoration: none;
+    color: whitesmoke;
+    margin-bottom: 25px;
+    margin-right: 20px; 
+    font-weight: lighter;
+    font-size: 14px;
+    transition: color 0.3s;
+}
+
 nav a:hover {
     color: grey;
 }
