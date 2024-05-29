@@ -1,9 +1,10 @@
+/*TELA HOME*/
 /* Estilizando o cabeçalho */
 header, .footer {
     list-style-type: none;
     margin: 0;
     padding: 0;
-    background-color: rgb(94, 56, 78);
+    background-color: #292929;
     height: 90px;
 }
 
@@ -58,7 +59,7 @@ nav a:hover {
 
 /* Estilizando o link "Cadastrar Atleta" */
 nav a:nth-last-child(2) {
-    background-color: rgb(177, 19, 119);
+    background-color: #666666;
     line-height: 15px;
     margin-bottom: 15px;
     margin-left: 20px;
@@ -72,12 +73,12 @@ nav a:nth-last-child(2) {
 }
 
 nav a:nth-last-child(2):hover {
-    background-color:#652836; /* Mudando a cor de fundo ao passar o mouse */
+    background-color:#4e4e4e; /* Mudando a cor de fundo ao passar o mouse */
 }
 
 /* Estilizando o último link da navegação */
 nav a:last-child {
-    border: 2px solid rgb(177, 19, 119);
+    border: 2px solid #666666;
     padding: 8px 30px;
     line-height: 15px;
     margin-bottom: 15px;
@@ -129,8 +130,8 @@ body {
 }
 
 /* Estilizando o fundo da página */
-html {
-    background-image: url(fundo.png);
+.home {
+    background-image: url(fundohome.png);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -160,7 +161,7 @@ ul a:hover {
 
 /* Estilizando o último link na lista */
 ul a:last-child {
-    background-color: #652836;
+    background-color: #292929;
     margin-left: 40px;
     padding: 10px 70px;
     border-radius: 20px;
@@ -233,4 +234,137 @@ ul a:last-child:hover {
 .close:hover,
 .close:focus {
     color: white;
+}
+
+/*TELA DE CADASTRO*/
+.cadastro {
+    background-image: url(fundocadastro.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+/* Estilizando o formulário de cadastro */
+form {
+    background-color: rgb(167, 167, 167); /* Cor de fundo semi-transparente */
+    max-width: 60%; /* Largura máxima do formulário */
+    margin: 10px auto; /* Margens superior e inferior automáticas, centralizando o formulário horizontalmente */
+    padding: 15px; /* Espaçamento interno do formulário */
+    border-radius: 8px; /* Cantos arredondados */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+
+/* Estilizando as linhas do formulário */
+.form-row {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+/* Estilizando os grupos de formulário (rótulo + campo) */
+.form-group {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.form-group:last-child {
+    margin-right: 15px;
+}
+
+/* Estilizando os rótulos */
+label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Estilizando os campos de entrada */
+input[type="text"],
+input[type="date"],
+input[type="email"] {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #666666;
+}
+
+/* Estilizando os botões */
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.submit-button{
+    background-color: #292929;
+    color: whitesmoke;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 20px;
+}
+
+.cancel-button{
+    text-decoration: none;
+    color: black;
+    border: 2px solid #292929;;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 20px;
+}
+
+.submit-button:hover,
+.cancel-button:hover {
+    background-color:  #666666;
+}
+
+/*TELA DE LISTAGEM*/
+.listar{
+    background-image: url(fundocadastro.jpg);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+.tabela {
+    margin: 20px; /* Adiciona margem para separar a tabela das bordas do navegador */
+}
+
+.tabela table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 2px solid #262626; /* Cor das grades da tabela */
+}
+
+.tabela th, .tabela td {
+    border: 1px solid #262626; /* Cor das grades das células */
+    padding: 8px;
+    text-align: left;
+    color: black
+}
+
+.tabela th {
+    background-color: #464545;
+    color: whitesmoke
+}
+
+.tabela td {
+    background-color: #969696;
+    color: black;
+}
+
+.popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    z-index: 1000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
