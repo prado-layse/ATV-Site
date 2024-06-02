@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Atualização de Atletas</title>
     <link rel="stylesheet" href="styles.css">
+
 </head>
 <body class="cadastro">
 <header>
@@ -19,7 +21,7 @@
 </header>
 
 <form action="/atualizar-atleta" method="post">
-    <input type="hidden" name="id" th:value="${atleta.cdAtleta}" />
+    <input type="hidden" name="cdAtleta" th:value="${atleta.cdAtleta}" />
 
     <div class="form-row">
         <div class="form-group">

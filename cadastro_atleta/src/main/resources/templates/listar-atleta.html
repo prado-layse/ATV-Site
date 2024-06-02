@@ -127,11 +127,9 @@
     }
 
     function updateAtleta(button) {
-    const id = button.getAttribute("data-id");
-    window.location.href = `/atualizar-atleta/${id}`;
-}
-
-
+        const id = button.getAttribute("data-id");
+        window.location.href = `/atualizar-atleta/${id}`;
+    }
 
     function deletarAtleta(button) {
         const id = button.getAttribute("data-id");

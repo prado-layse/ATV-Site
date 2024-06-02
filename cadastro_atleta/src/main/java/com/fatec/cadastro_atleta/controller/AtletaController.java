@@ -49,7 +49,12 @@ public class AtletaController {
         }
     }
 
-
+    @PostMapping("/atualizar-atleta")
+    public String atualizarAtleta(@ModelAttribute Atleta atleta, Model model) {
+        atletaService.atualizarAtleta(Long.valueOf(atleta.getCdAtleta()), atleta);
+        model.addAttribute("message", "Atleta atualizado com sucesso!");
+        return "result"; // Certifique-se de ter uma página HTML correspondente chamada "result.html"
+    }
 
     @GetMapping("/listar-atleta")
     public String listarAtletas(Model model) {
