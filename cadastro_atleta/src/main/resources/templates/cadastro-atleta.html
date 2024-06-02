@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Atletas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="cadastro">
+<header>
+    <nav>
+        <a href="/" id="home-link">Home</a>
+        <a href="#" id="atleta-link">Atletas</a>
+        <a href="#">Modalidades</a>
+        <a href="#">Notícias</a>
+        <a href="#">Login</a>
+        <a href="#">Registrar</a>
+    </nav>
+</header>
+
+<form action="/cadastro-atleta" method="post">
+    <div class="form-row">
+        <div class="form-group">
+            <label for="nmAtleta">Nome:</label>
+            <input type="text" id="nmAtleta" name="nmAtleta" required>
+        </div>
+        <div class="form-group">
+            <label for="nmSobrenome">Sobrenome:</label>
+            <input type="text" id="nmSobrenome" name="nmSobrenome" required>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="dtNascimento">Data de Nascimento:</label>
+            <input type="date" id="dtNascimento" name="dtNascimento" required>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="dsEndereco">Endereço:</label>
+            <input type="text" id="dsEndereco" name="dsEndereco" required>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="sgEstado">Estado:</label>
+            <input type="text" id="sgEstado" name="sgEstado" maxlength="2" required>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="dsTelefone">Telefone:</label>
+            <input type="text" id="dsTelefone" name="dsTelefone" required placeholder="(XX) XXXXX-XXXX">
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group">
+            <label for="dsEmail">Email:</label>
+            <input type="email" id="dsEmail" name="dsEmail" required>
+        </div>
+    </div>
+
+    <div class="buttons">
+        <a href="index" class="cancel-button">Cancelar</a>
+        <button type="submit" class="submit-button">Cadastrar</button>
+    </div>
+
+    <div class="overlay"></div> <!-- Overlay -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <a href="cadastro-atleta">Cadastrar Atleta</a>
+            <a href="listar-atleta">Listar Atletas</a>
+        </div>
+    </div>
+
+    <script>
+        //abrir pop-up
+        document.getElementById("atleta-link").addEventListener("click", function(event) {
+            event.preventDefault(); // Impede o comportamento padrão do link
+
+            var atletaLink = document.getElementById("atleta-link");
+            var modal = document.getElementById("modal");
+            var overlay = document.querySelector(".overlay");
+
+            // Obter as coordenadas do item "Atletas"
+            var rect = atletaLink.getBoundingClientRect();
+
+            // Definir as coordenadas do modal com base no item "Atletas"
+            modal.style.display = "block";
+            modal.style.top = (rect.bottom + window.scrollY + 10) + "px";
+            modal.style.left = rect.left + "px";
+
+            overlay.style.display = "block";
+        });
+
+        // Fechar o modal ao clicar fora dele
+        window.addEventListener("click", function(event) {
+            var modal = document.getElementById("modal");
+            var overlay = document.querySelector(".overlay");
+            var atletaLink = document.getElementById("atleta-link");
+            if (event.target !== modal && event.target !== atletaLink) {
+                modal.style.display = "none";
+                overlay.style.display = "none";
+            }
+        });
+    </script>
+
+</form>
+</body>
+</html>

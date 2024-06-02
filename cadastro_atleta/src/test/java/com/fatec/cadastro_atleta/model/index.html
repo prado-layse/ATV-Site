@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="/styles.css"> <!-- Certifique-se de que este caminho está correto -->
 </head>
-<body class="home">
+<body>
 <header>
     <nav>
-        <a href="/" id="home-link">Home</a>
+        <a href="#">Home</a>
         <a href="#" id="atleta-link">Atletas</a>
         <a href="#">Modalidades</a>
         <a href="#">Notícias</a>
@@ -18,55 +18,41 @@
     </nav>
 </header>
 
-<div class="main">
-    <div class="background-image"></div>
-
-    <div class="txt-bem-vindo">
-        Bem-vindo
-    </div>
-
-    <div class="txt-atletica">
-        Atlética Fatec-BS
-    </div>
-
-    <div class="txt-convite">
-        Deseja fazer parte da nossa tripulação?
-    </div>
-
+<div class="main-content">
+    <div class="txt-bem-vindo">Bem-vindo</div>
+    <div class="txt-atletica">Atlética Fatec-BS</div>
+    <div class="txt-convite">Deseja fazer parte da nossa tripulação?</div>
     <ul>
-        <a href="cadastro-atleta">Cadastrar Atleta</a>
+        <a href="/cadastro-atleta">Cadastrar Atleta</a>
     </ul>
 </div>
 
-<div class="overlay"></div> <!-- Overlay -->
+<div class="overlay"></div>
 <div id="modal" class="modal">
     <div class="modal-content">
-        <a href="cadastro-atleta">Cadastrar Atleta</a>
-        <a href="listar-atleta">Listar Atletas</a>
+        <a href="/cadastro-atleta">Cadastrar Atleta</a>
+        <a href="/listar-atletas">Listar Atletas</a>
     </div>
 </div>
 
-<script>
-    //abrir pop-up
-    document.getElementById("atleta-link").addEventListener("click", function(event) {
-        event.preventDefault(); // Impede o comportamento padrão do link
+<footer class="footer">
+    <img src="instalogo.png" alt="Logo" class="footer-logo">
+    <a href="https://www.instagram.com/atleticafatecbs/" target="_blank">Siga-nos no Instagram</a>
+</footer>
 
+<script>
+    document.getElementById("atleta-link").addEventListener("click", function(event) {
+        event.preventDefault();
         var atletaLink = document.getElementById("atleta-link");
         var modal = document.getElementById("modal");
         var overlay = document.querySelector(".overlay");
-
-        // Obter as coordenadas do item "Atletas"
         var rect = atletaLink.getBoundingClientRect();
-
-        // Definir as coordenadas do modal com base no item "Atletas"
         modal.style.display = "block";
         modal.style.top = (rect.bottom + window.scrollY + 10) + "px";
         modal.style.left = rect.left + "px";
-
         overlay.style.display = "block";
     });
 
-    // Fechar o modal ao clicar fora dele
     window.addEventListener("click", function(event) {
         var modal = document.getElementById("modal");
         var overlay = document.querySelector(".overlay");

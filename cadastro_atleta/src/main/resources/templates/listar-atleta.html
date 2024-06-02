@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listagem de Atletas</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="listar">
+<header>
+    <nav>
+        <a href="/" id="home-link">Home</a>
+        <a href="#" id="atleta-link">Atletas</a>
+        <a href="#">Modalidades</a>
+        <a href="#">Notícias</a>
+        <a href="#">Login</a>
+        <a href="#">Registrar</a>
+    </nav>
+</header>
+
+<main>
+    <div class="search-container">
+        <input type="text" id="search" placeholder="Pesquisar atleta...">
+        <button onclick="searchAtletas()">Pesquisar</button>
+    </div>
+    <div class="tabela">
+        <table id="atletasTable" border="1">
+            <thead>
+            <tr>
+                <th>Código</th>
+                <th>Nome</th>
+                <th>Sobrenome</th>
+                <th>Data de Nascimento</th>
+                <th>Endereço</th>
+                <th>Estado</th>
+                <th>Telefone</th>
+                <th>Email</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody id="atletasBody" th:each="atleta : ${atletas}">
+            <tr>
+                <td th:text="${atleta.cdAtleta}"></td>
+                <td th:text="${atleta.nmAtleta}"></td>
+                <td th:text="${atleta.nmSobrenome}"></td>
+                <td th:text="${atleta.dtNascimento}"></td>
+                <td th:text="${atleta.dsEndereco}"></td>
+                <td th:text="${atleta.sgEstado}"></td>
+                <td th:text="${atleta.dsTelefone}"></td>
+                <td th:text="${atleta.dsEmail}"></td>
+                <td>
+                    <button onclick="updateAtleta(this)" th:data-id="${atleta.cdAtleta}">Atualizar</button>
+                    <button onclick="deletarAtleta(this)" th:data-id="${atleta.cdAtleta}">Excluir</button>
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="overlay"></div>
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <a href="cadastro-atleta">Cadastrar Atleta</a>
+            <a href="listar-atleta">Listar Atletas</a>
+        </div>
+    </div>
+</main>
+
+<script>
+    //abrir pop-up
+    document.getElementById("atleta-link").addEventListener("click", function(event) {
+        event.preventDefault(); // Impede o comportamento padrão do link
+
+        var atletaLink = document.getElementById("atleta-link");
+        var modal = document.getElementById("modal");
+        var overlay = document.querySelector(".overlay");
+
+        // Obter as coordenadas do item "Atletas"
+        var rect = atletaLink.getBoundingClientRect();
+
+        // Definir as coordenadas do modal com base no item "Atletas"
+        modal.style.display = "block";
+        modal.style.top = (rect.bottom + window.scrollY + 10) + "px";
+        modal.style.left = rect.left + "px";
+
+        overlay.style.display = "block";
+    });
+
+    // Event listener para os botões de exclusão
+    var deleteButtons = document.querySelectorAll(".deletar-atleta");
+    deleteButtons.forEach(button => {
+        button.addEventListener("click", function() {
+            var atletaId = this.getAttribute("data-id");
+            deletarAtleta(atletaId);
+        });
+    });
+
+    // Fechar o modal ao clicar fora dele
+    window.addEventListener("click", function(event) {
+        var modal = document.getElementById("modal");
+        var overlay = document.querySelector(".overlay");
+        var atletaLink = document.getElementById("atleta-link");
+        if (event.target !== modal && event.target !== atletaLink) {
+            modal.style.display = "none";
+            overlay.style.display = "none";
+        }
+    });
+
+    function searchAtletas() {
+        const query = document.getElementById("search").value.toLowerCase();
+        const rows = document.querySelectorAll("#atletasBody tr");
+
+        rows.forEach(row => {
+            const cells = row.querySelectorAll("td");
+            const nome = cells[1].innerText.toLowerCase();
+            const sobrenome = cells[2].innerText.toLowerCase();
+            const email = cells[7].innerText.toLowerCase();
+            const telefone = cells[6].innerText.toLowerCase();
+
+            if (nome.includes(query) || sobrenome.includes(query) || email.includes(query) || telefone.includes(query)) {
+                row.style.display = "";
+            } else {
+                row.style.display = "none";
+            }
+        });
+    }
+
+    function updateAtleta(button) {
+    const id = button.getAttribute("data-id");
+    window.location.href = `/atualizar-atleta/${id}`;
+}
+
+
+
+    function deletarAtleta(button) {
+        const id = button.getAttribute("data-id");
+        if (confirm("Você tem certeza que deseja excluir este atleta?")) {
+            // Aqui você pode chamar sua função de exclusão passando o ID do atleta
+            fetch(`/atletas/${id}`, {
+                method: 'DELETE'
+            }).then(response => {
+                if (response.ok) {
+                    alert("Atleta excluído com sucesso.");
+                    location.reload(); // Recarrega a página após a exclusão
+                } else {
+                    alert("Erro ao excluir atleta.");
+                }
+            });
+        }
+    }
+
+
+</script>
+</body>
+</html>

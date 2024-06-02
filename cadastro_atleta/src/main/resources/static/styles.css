@@ -1,5 +1,5 @@
 /*TELA HOME*/
-/* Estilizando o cabeçalho */
+/* Estilizando o cabeçalho e o rodapé */
 header, .footer {
     list-style-type: none;
     margin: 0;
@@ -39,14 +39,14 @@ header, .footer {
 nav {
     display: flex;
     justify-content: flex-end;
-    align-items: end; /* Alterado de 'end' para 'center' */
+    align-items: center; /* Centraliza os itens verticalmente */
     height: 100%;
 }
 
 nav a {
     text-decoration: none;
     color: whitesmoke;
-    margin-bottom: 25px;;
+    margin-bottom: 25px;
     margin-right: 40px;
     font-weight: lighter;
     font-size: 14px;
@@ -73,7 +73,7 @@ nav a:nth-last-child(2) {
 }
 
 nav a:nth-last-child(2):hover {
-    background-color:#4e4e4e; /* Mudando a cor de fundo ao passar o mouse */
+    background-color: #4e4e4e; /* Mudando a cor de fundo ao passar o mouse */
 }
 
 /* Estilizando o último link da navegação */
@@ -82,7 +82,6 @@ nav a:last-child {
     padding: 8px 30px;
     line-height: 15px;
     margin-bottom: 15px;
-    padding: 8px 25px;
     border-radius: 20px;
 }
 
@@ -116,7 +115,7 @@ body {
     margin-top: 15px;
     margin-left: 80px;
     font-size: 22pt; /* Alterado de 'font: 22pt trebuchet MS;' para 'font-size: 22pt;' */
-    font-weight: 500;  
+    font-weight: 500;
 }
 
 /* Estilizando o texto 'Convite' */
@@ -236,17 +235,18 @@ ul a:last-child:hover {
     color: white;
 }
 
-/*TELA DE CADASTRO*/
-.cadastro {
+/*TELA DE CADASTRO E ATUALIZAÇÃO*/
+.cadastro, .atualizacao {
     background-image: url(fundocadastro.jpg);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     background-repeat: no-repeat;
 }
-/* Estilizando o formulário de cadastro */
+
+/* Estilizando o formulário de cadastro e atualização */
 form {
-    background-color: rgb(167, 167, 167); /* Cor de fundo semi-transparente */
+    background-color: rgba(167, 167, 167, 0.9); /* Cor de fundo semi-transparente */
     max-width: 60%; /* Largura máxima do formulário */
     margin: 10px auto; /* Margens superior e inferior automáticas, centralizando o formulário horizontalmente */
     padding: 15px; /* Espaçamento interno do formulário */
@@ -294,9 +294,7 @@ input[type="email"] {
     margin-top: 20px;
 }
 
-.submit-button{
-    background-color: #292929;
-    color: whitesmoke;
+.submit-button, .cancel-button {
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -305,35 +303,43 @@ input[type="email"] {
     border-radius: 20px;
 }
 
-.cancel-button{
-    text-decoration: none;
-    color: black;
-    border: 2px solid #292929;;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    padding: 10px 20px;
-    border-radius: 20px;
+.submit-button {
+    background-color: #292929;
+    color: whitesmoke;
 }
 
-.submit-button:hover,
-.cancel-button:hover {
+.cancel-button {
+    text-decoration: none;
+    color: black;
+    border: 2px solid #292929;
+}
+
+.submit-button:hover, .cancel-button:hover {
     background-color:  #666666;
 }
 
 /*TELA DE LISTAGEM*/
-.listar{
+.listar {
     background-image: url(fundocadastro.jpg);
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
     background-repeat: no-repeat;
+    color: black;
 }
+
 .tabela {
-    margin: 20px; /* Adiciona margem para separar a tabela das bordas do navegador */
+    width: 80%; /* Largura máxima da tabela */
+    background-color: white; /* Fundo branco para a tabela */
+    border-radius: 5px; /* Cantos arredondados */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave ao redor da tabela */
+    overflow: hidden; /* Garante que o conteúdo não exceda os cantos arredondados */
+    margin: 20px auto; /* Centraliza a tabela horizontalmente */
 }
 
 .tabela table {
+    justify-content: center;
+    background-color: #464545;
     width: 100%;
     border-collapse: collapse;
     border: 2px solid #262626; /* Cor das grades da tabela */
@@ -342,13 +348,12 @@ input[type="email"] {
 .tabela th, .tabela td {
     border: 1px solid #262626; /* Cor das grades das células */
     padding: 8px;
-    text-align: left;
-    color: black
+    text-align: center;
 }
 
 .tabela th {
     background-color: #464545;
-    color: whitesmoke
+    color: black;
 }
 
 .tabela td {
