@@ -1,5 +1,5 @@
 server:
-    port: [Porta Gerada do OnRender]
+    port: 5432
 
 spring:
     datasource:
