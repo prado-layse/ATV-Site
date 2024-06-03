@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+   build:
     runs-on: windows-latest
 
     steps:
@@ -20,14 +20,13 @@ jobs:
 
       - name: Build with Maven
         run: |
-          cd ${{ github.workspace }}
+          cd cadastro_atleta
           mvn clean install
-
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: java-app
-          path: '${{ github.workspace }}/target/*.jar'
+          path: '${{ github.workspace }}/cadastro_atleta/target/*.jar'
 
   deploy:
     runs-on: windows-latest
