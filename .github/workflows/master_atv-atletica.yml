@@ -6,15 +6,38 @@ name: Build and deploy JAR app to Azure Web App - atv-atletica
 on:
   push:
     branches:
-      - master
+      - main
   workflow_dispatch:
 
 jobs:
   build:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
 
+    services:
+      postgres:
+        image: postgres:latest
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: testdb
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - uses: actions/checkout@v4
+
+      - name: Wait for PostgreSQL to be ready
+        run: |
+          echo "Waiting for PostgreSQL to be ready..."
+          while ! pg_isready -h localhost -p 5432 > /dev/null 2> /dev/null; do
+            echo "Waiting..."
+            sleep 1
+          done
+        shell: bash
 
       - name: Set up Java version
         uses: actions/setup-java@v1
@@ -22,16 +45,24 @@ jobs:
           java-version: '17'
 
       - name: Build with Maven
-        run: mvn clean install
+        run: mvn clean package
+        working-directory: cadastro_atleta
+        env:
+          SPRING_DATASOURCE_URL: jdbc:postgresql://localhost:5432/testdb
+          SPRING_DATASOURCE_USERNAME: postgres
+          SPRING_DATASOURCE_PASSWORD: postgres
+
+      - name: List files after build
+        run: ls -R cadastro_atleta/target
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
           name: java-app
-          path: '${{ github.workspace }}/target/*.jar'
+          path: cadastro_atleta/target/cadastro_atleta-0.0.1-SNAPSHOT.war
 
   deploy:
-    runs-on: windows-latest
+    runs-on: ubuntu-latest
     needs: build
     environment:
       name: 'Production'
@@ -45,18 +76,20 @@ jobs:
         with:
           name: java-app
       
+      - name: List files after download
+        run: ls -R
+
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_F773D9ECB288439DB5192817F217E1CB }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_AB42D5B2AC554CD4AEF260F8FE2F973D }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_32BE9C2ECBC24E499C1E89DE55DB139A }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_09F3B49992E24974ADF686F885C379F3 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_1451ACB222994021BE6451AB70605267 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_02EEE9F875104193B8E153166F4CB48D }}
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
         uses: azure/webapps-deploy@v2
         with:
-          app-name: 'atv-atletica'
+          app-name: 'atletica'
           slot-name: 'Production'
-          package: '*.jar'
-          
+          package: cadastro_atleta-0.0.1-SNAPSHOT.war
