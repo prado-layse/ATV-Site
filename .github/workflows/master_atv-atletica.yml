@@ -21,7 +21,7 @@ jobs:
       - name: Build with Maven
         run: |
           cd cadastro_atleta
-          mvn clean package -e
+          mvn clean package -x
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
         with:
